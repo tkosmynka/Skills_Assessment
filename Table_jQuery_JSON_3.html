@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=us-ascii">
+
+  <title></title>
+  <script type='text/javascript' src=
+  'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'>
+   </script>
+  <style type='text/css'>
+  #teamTable {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    width: 235px;
+  }
+  #teamTable th,
+  #teamTable td {
+    padding: 4px;
+  }
+  #teamTable thead {
+    background-color: #ccc;
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+  #teamTable tbody th {
+    text-align: left;
+  }
+  #teamTable tbody td {
+    text-align: right;
+  }
+  #teamTable tbody tr:nth-child(even) {
+    background-color: #eee;
+  }
+
+
+.status {
+	width:30px;
+}
+.name {
+	width:50px;
+}
+.phone {
+	width: 100px;
+}
+.email { display:none;
+	width:100px;
+}
+
+.address { display:none;}
+  #myOptions{ float: left; border: solid 1px #999; width:110px; margin:6px 0 0 123px; height:20px}
+        
+  </style>
+  
+  <script type="text/javascript">
+	$(document).ready(function(){
+            $("#demo1 li").hover(makeTall,makeShort);
+           
+        }); // close document.ready
+
+        function makeTall(){  $(this).animate({"height":65},220);}
+        function makeShort(){ $(this).animate({"height":35},220);}
+  </script>
+
+  <script type='text/javascript'>
+//<![CDATA[ 
+  $(window).load(function(){
+  //<![CDATA[
+  // friends
+  var friends = [
+    {
+    "name": "Christian",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"on"},
+  {
+    "name": "Rich",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"on"},
+  {
+    "name": "Scott",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"on"},
+  {
+    "name": "Danny",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"on"},
+  {
+    "name": "Taka",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"away"},
+  {
+    "name": "Tim",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"idle"},
+  {
+    "name": "Patrick",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"on"},
+  {
+    "name": "Jaques",
+    "phone": "310-555-1212",
+    "email": "me@email.com", "address":"555 main", "status":"idle"}
+  ];
+  friends.sort(sortArray('name'));
+
+  function sortArray(field) {
+    return function(a, b) {
+        if (a[field] > b[field]) {
+            return 1;
+        } else if (a[field] < b[field]) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+  }
+
+  // Apply jQuery template.
+  $(function() {
+    $("#teamTemplate").tmpl(friends).appendTo("#teamList");
+  });
+  // ]]>
+
+  function hideColumn(columnIndex) {
+    $('#teamTable thead th, #teamTable tbody td').show();
+    $('#teamTable thead th:nth-child(' + (columnIndex) + '), #teamTable tbody td:nth-child(' + (columnIndex) + '), #teamTable #address, #teamTable td.address').hide();
+
+  }
+
+  $("#myOptions").change(function() {
+    selectedVal = $(this).val();
+    console.log(selectedVal);
+    hideColumn(selectedVal);
+    showColumn(selectedVal);
+  });
+  });//]]>  
+
+  </script>
+</head>
+
+<body>
+  <table id="teamTable">
+    <tbody id="teamList"></tbody>
+  </table>
+  
+  <script src=
+  "http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" type=
+  "text/javascript">
+</script>
+
+  <script id="teamTemplate" type="text/x-jquery-tmpl">
+      <tr>
+             <td class="status">${status}</td>         
+            <th class="name">${name}</th>
+            <td class="phone">${phone}</td>
+            <td  class="email">${email}</td>
+        </tr>
+  </script>
+
+  <table>
+    <tr rowspan="4">
+      <td>
+      		<select id="myOptions">
+       			 <option value="4">phone number</option>
+		        <option value="3">email address</option>
+      		</select>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
